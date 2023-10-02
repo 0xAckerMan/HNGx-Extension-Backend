@@ -38,6 +38,7 @@ func main(){
     app.Get("/videos/:filename", videoHandler)
     app.Post("/uploader/:videoFilename", streamUploadHandler)
     app.Get("/videos", listVideosHandler)
+    app.Delete("/videos/:videoFilename", deleteVideoHandler)
     fmt.Printf("Server listening on port %s\n", "3000")
     log.Fatal(app.Listen(":80"))
 }
@@ -152,3 +153,25 @@ func listVideosHandler(c *fiber.Ctx) error {
     return c.JSON(videoList)
 }
 
+func deleteVideoHandler(c *fiber.Ctx) error {
+    // Extract video filename from the URL params
+    videoFilename := c.Params("videoFilename")
+    if videoFilename == "" {
+        return c.Status(http.StatusBadRequest).SendString("Missing video filename")
+    }
+
+    // Construct the full path to the video file
+    videoPath := filepath.Join(uploadDir, videoFilename)
+
+    // Check if the video file exists
+    if _, err := os.Stat(videoPath); os.IsNotExist(err) {
+        return c.Status(http.StatusNotFound).SendString("Video not found")
+    }
+
+    // Attempt to delete the video file
+    if err := os.Remove(videoPath); err != nil {
+        return c.Status(http.StatusInternalServerError).SendString("Failed to delete video")
+    }
+
+    return c.Status(http.StatusOK).SendString("Video deleted successfully")
+}
