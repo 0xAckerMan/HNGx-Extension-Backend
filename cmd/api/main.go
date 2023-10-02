@@ -39,7 +39,7 @@ func main(){
     app.Post("/uploader/:videoFilename", streamUploadHandler)
     app.Get("/videos", listVideosHandler)
     fmt.Printf("Server listening on port %s\n", "3000")
-    log.Fatal(app.Listen(":3000"))
+    log.Fatal(app.Listen(":80"))
 }
 
 
