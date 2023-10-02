@@ -6,7 +6,7 @@
 ```
 https://chrome-extension-e75d.onrender.com/api/health
 ```
-![](https://hackmd.io/_uploads/H1FdXfdxa.png)
+![](https://hackmd-prod-images.s3-ap-northeast-1.amazonaws.com/uploads/upload_4408cfc21438ce4fb83a1eb39f3182a1.png?AWSAccessKeyId=AKIA3XSAAW6AWSKNINWO&Expires=1696241663&Signature=DkChmJv7%2F2IHU6i8R6u0BsmnHQs%3D)
 
 
 - **Posting or uploading a video**  ```/uploader/:videoname```</br>
